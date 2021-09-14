@@ -1,13 +1,15 @@
-const lists=require("./input/lists.json");
+function callback2(boardId,lists,cb){
 
-function callback2(boardId,getAllList){
+    setTimeout(() => {      
+            const result=lists[boardId];
 
-    setTimeout(() => {
-        // Your code here      
-            const result=getAllList(boardId,lists);
-            console.log(result);
+            if (result) {
+                cb(null, result);
+            } else {
+                cb(new Error("Invalid Board Id"));
+            }
         
-    }, 3 * 1000);
+    }, 2 * 1000);
 
 }
 
