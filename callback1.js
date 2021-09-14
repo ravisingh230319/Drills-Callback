@@ -1,11 +1,13 @@
-const boards=require("./input/boards.json");
+function callback1(boardId,boards,cb){
+    setTimeout(() => { 
+        let result=boards.find(element => boardId===element.id);
 
-function callback1(boardId,getBoardInformation){
-    setTimeout(() => {
-        // Your code here        
-        const result=getBoardInformation(boardId,boards);
-        console.log(result);        
-    }, 3 * 1000);
+        if (result) {
+            cb(null, result);
+        } else {
+            cb(new Error("Invalid Board Id"));
+        }
+    }, 2 * 1000);
 }
 
 module.exports=callback1;
