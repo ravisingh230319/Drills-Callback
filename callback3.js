@@ -1,12 +1,15 @@
-const cards=require("./input/cards.json");
-
-function callback3(listId,getAllCards){
+function callback3(listId,cards,cb){
 
     setTimeout(() => {     
-            const result=getAllCards(listId,cards);
-            console.log(result);
+        const result=cards[listId];
+
+        if (result) {
+            cb(null, result);
+        } else {
+            cb(new Error("Invalid List Id"));
+        }
         
-    }, 3 * 1000);
+    }, 2 * 1000);
 
 }
 
