@@ -1,16 +1,15 @@
-function callback3(listId,cards,cb){
+function callback3(listId, cards) {
+    return new Promise((resolve, reject) => {
+        setTimeout(() => {
+            const result = cards[listId];
 
-    setTimeout(() => {     
-        const result=cards[listId];
-
-        if (result) {
-            cb(null, result);
-        } else {
-            cb(new Error("Invalid List Id"));
-        }
-        
-    }, 2 * 1000);
-
+            if (result) {
+                resolve(result)
+            } else {
+                reject(new Error("Invalid List Id"));
+            }
+        }, 2 * 1000);
+    });
 }
 
-module.exports=callback3;
+module.exports = callback3;

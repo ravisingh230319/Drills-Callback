@@ -1,12 +1,6 @@
-const callback1=require('../callback1.js');
-const boards=require("../input/boards.json");
+const callback1 = require("../callback1.js");
+const boards = require("../input/boards.json");
 
-function cb(error,boardData){
-    if (error) {
-        console.log(error);
-    } else {
-        console.log(boardData);
-    }
-}
-
-callback1("mcu453ed",boards,cb);
+callback1("mcu453e", boards)
+    .then((data) => console.log(data))
+    .catch((err) => console.log(err));

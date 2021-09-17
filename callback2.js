@@ -1,16 +1,15 @@
-function callback2(boardId,lists,cb){
-
-    setTimeout(() => {      
-            const result=lists[boardId];
+function callback2(boardId, lists) {
+    return new Promise((resolve, reject) => {
+        setTimeout(() => {
+            const result = lists[boardId];
 
             if (result) {
-                cb(null, result);
+                resolve(result);
             } else {
-                cb(new Error("Invalid Board Id"));
+                reject(new Error("Invalid Board Id"));
             }
-        
-    }, 2 * 1000);
-
+        }, 2 * 1000);
+    });
 }
 
-module.exports=callback2;
+module.exports = callback2;
