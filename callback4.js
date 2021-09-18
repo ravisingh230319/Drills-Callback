@@ -5,15 +5,15 @@ function callback4(callback1, callback2, callback3, boards, lists, cards) {
         callback1(result.id, boards)
             .then((data) => {
                 console.log(data);
-                callback2(result.id, lists)
-                    .then((data) => {
-                        console.log(data);
-                        const mind = data.find((element) => element.name === "Mind");
-                        callback3(mind.id, cards)
-                            .then((data) => console.log(data))
-                            .catch((err) => console.log(err));
-                    })
-                    .catch((err) => console.log(err));
+                return callback2(result.id, lists);
+            })
+            .then((listData) => {
+                console.log(listData);
+                const mind = listData.find((element) => element.name === "Mind");
+                return callback3(mind.id, cards);
+            })
+            .then((data) => {
+                console.log(data);
             })
             .catch((err) => console.log(err));
     }, 2 * 1000);

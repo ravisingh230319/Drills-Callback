@@ -5,20 +5,20 @@ function callback5(callback1, callback2, callback3, boards, lists, cards) {
         callback1(result.id, boards)
             .then((data) => {
                 console.log(data);
-                callback2(result.id, lists)
-                    .then((data) => {
-                        console.log(data);
-                        const mind = data.find((element) => element.name === "Mind");
-                        const space = data.find((element) => element.name === "Space");
-                        callback3(mind.id, cards)
-                            .then((data) => console.log(data))
-                            .catch((err) => console.log(err));
-
-                        callback3(space.id, cards)
-                            .then((data) => console.log(data))
-                            .catch((err) => console.log(err));
-                    })
-                    .catch((err) => console.log(err));
+                return callback2(result.id, lists);
+            })
+            .then((listData) => {
+                console.log(listData);
+                let promises = [];
+                const mind = listData.find((element) => element.name === "Mind");
+                const space = listData.find((element) => element.name === "Space");
+                promises.push(callback3(mind.id, cards));
+                promises.push(callback3(space.id, cards));
+                return Promise.all(promises);
+            })
+            .then(([mindCardData,spaceCardData]) => {  
+                console.log(mindCardData);  
+                console.log(spaceCardData);
             })
             .catch((err) => console.log(err));
     }, 2 * 1000);
